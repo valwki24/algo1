@@ -9,3 +9,64 @@ BEGIN
     sum := num1 + num2 + num3;
     Write(sum)
 END
+
+//CHECKPOINT
+
+//At this checkpoint, you are asked to write an algorithm that read a sentence, which ends with a point, character by character, and to determine:
+
+//Instructions
+
+//The length of the sentence (the number of characters).
+//The number of words in the sentence (assuming that the words are separated by a single space).
+//The number of vowels in the sentence.
+//You have to keep in mind that: 
+
+//Each character will be treated separately.
+//The last character is the point.
+//Use three variables as counters.
+
+
+ALGORITHM analyze_sentence
+VAR
+    sentence : STRING;
+    length, word_count, vowel_count : INTEGER;
+    i : INTEGER;
+    vowels : STRING;
+BEGIN
+    // Initialize variables
+    length := 0;
+    word_count := 0;
+    vowel_count := 0;
+    vowels := "aeiouAEIOU"; // Define vowels
+    
+    // Read the sentence from the user
+    Read(sentence);
+    
+    // Initialize word count
+    word_count := 1; // Start with 1 as there is at least one word
+    
+    // Iterate through each character in the sentence
+    FOR i := 1 TO LENGTH(sentence) DO
+        // Check if the current character is not the point
+        IF sentence[i] <> '.' THEN
+            // Increment length
+            length := length + 1;
+            
+            // Check if the character is a vowel
+            IF sentence[i] IN vowels THEN
+                vowel_count := vowel_count + 1;
+            END IF;
+            
+            // Check if the character is a space
+            IF sentence[i] = ' ' THEN
+                word_count := word_count + 1;
+            END IF;
+        END IF;
+    END FOR;
+    
+    // Decrement length to exclude the final point
+    IF sentence[LENGTH(sentence)] = '.' THEN
+        length := length - 1;
+    END IF;
+    
+    
